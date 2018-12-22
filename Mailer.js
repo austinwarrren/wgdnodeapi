@@ -40,5 +40,14 @@ class Mailer{
             subject: 'Contact Message from: ' + name,
             text: message
         }
+        // Send message:
+        mailgun.messages().send(data, function(err, body){
+            if(err){
+                console.log('Error');
+            }
+            else{
+                console.log('Sent Message');
+            }
+        });
     }
 }

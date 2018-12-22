@@ -16,9 +16,9 @@ app.get('/', function (req, res) {
 
 app.post('/contact', function(req,res){
   // Get necessary information from JSON response
-  const name = req.body.name;
-  const email = req.body.email;
-  const message = req.body.message;
+  const name = req.body.Name;
+  const email = req.body.Email;
+  const message = req.body.Message;
   // Send a message using Mailer
   var mailer = new Mailer(name, email, message);
   mailer.send();
