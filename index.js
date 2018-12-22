@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 var Charge = require('./Charge');
+var Mailer = require('./Mailer');
 
 app.use(bodyParser.json({ strict: false }));
 
@@ -14,7 +15,13 @@ app.get('/', function (req, res) {
 })
 
 app.post('/contact', function(req,res){
-  
+  // Get necessary information from JSON response
+  const name = req.body.name;
+  const email = req.body.email;
+  const message = req.body.message;
+  // Send a message using Mailer
+  var mailer = new Mailer(name, email, message);
+  mailer.send();
 })
 
 app.post('/pay', function(req, res){
