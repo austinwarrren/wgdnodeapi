@@ -19,9 +19,20 @@ app.post('/contact', function(req,res){
   const name = req.body.Name;
   const email = req.body.Email;
   const message = req.body.Message;
-  // Send a message using Mailer
-  var mailer = new Mailer(name, email, message);
-  mailer.send();
+  if(name == null || name === ""){
+    res.status(400).json({ error: 'Field \'name\' cannot be null or empty.'});
+  }
+  else if(email == null || email === ""){
+    res.status(400).json({ error: 'Field \'email\' cannot be null or empty.'});
+  }
+  else if(message == null || message === ""){
+    res.status(400).json({ error: 'Field \'message\' cannot be null or empty.'});
+  }
+  else{
+    const mailer = new Mailer(name, email, message);
+    mailer.send();
+    res.status(200).json({ success: 'Message sent successfully.'});
+  }
 })
 
 app.post('/pay', function(req, res){

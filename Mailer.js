@@ -1,7 +1,7 @@
 "use strict";
 const mailgunApiKey = process.env.MAILGUN_API_KEY;
 const domain = 'mailer.dreamwork.today';
-const destination = 'austin.warren.1995@gmail.com'
+const destination = 'austin.warren.1995@gmail.com';
 var Mailgun = require('mailgun-js');
 
 class Mailer{
@@ -29,22 +29,24 @@ class Mailer{
         return message;
     }
     set message(message){
-        this._message;
+        this._message = message;
     }
 
     send(){
         var mailgun = new Mailgun({apiKey: mailgunApiKey, domain: domain});
+        // Should implement some input validation below...
+        var content = this._message + '\n\n' + 'Reply to: ' + this._email;
         var data = {
             // Specify email data
-            from: email,
+            from: 'noreply@' + domain,
             to: destination,
-            subject: 'Contact Message from: ' + name,
-            text: message
+            subject: 'Contact Message from: ' + this._name,
+            text: content
         }
         // Send message:
         mailgun.messages().send(data, function(err, body){
             if(err){
-                console.log('Error');
+                console.log(err);
             }
             else{
                 console.log('Sent Message');
