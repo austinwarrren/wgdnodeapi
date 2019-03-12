@@ -1,6 +1,6 @@
 "use strict";
 const testKeySecret = process.env.STRIPE_TEST_SECRET_KEY;
-const stripe = require("stripe")(testKeySecret); // Fill in second arg with Stripe secret key
+const stripe = require("stripe")(testKeySecret); 
 
 class Charge{
     constructor(token, amount){

@@ -1,7 +1,7 @@
 "use strict";
 const mailgunApiKey = process.env.MAILGUN_API_KEY;
-const domain = 'mailer.dreamwork.today';
-const destination = 'austin.warren.1995@gmail.com';
+const domain = process.env.MAILGUN_DOMAIN;
+const destination = process.env.DESTINATION_EMAIL;
 var Mailgun = require('mailgun-js');
 
 class Mailer{
